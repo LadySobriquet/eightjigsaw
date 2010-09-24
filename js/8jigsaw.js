@@ -1,26 +1,23 @@
 var puzzle;
 var HEIGHT;
 var WIDTH;
-var iZero;
-var jZero;
+var i_zero;
+var j_zero;
 
-function init(p) {
-	HEIGHT = p.length;
-	WIDTH = p[0].length;
-	puzzle = p;
-	getZero();
-	draw();
-	keyboard_map();
-}
+var Log = {
+	info: function(msg) {
+		$("#log").html(msg);
+	}
+};
 
-function getZero() {
+function get_zero() {
 	var i = 0;
 	var j = 0;
 	for(i = 0; i < WIDTH; i++) {
 		for(j = 0; j < HEIGHT; j++) {
 			if(puzzle[i][j] == 0) {
-				iZero = i;
-				jZero = j;
+				i_zero = i;
+				j_zero = j;
 				return;
 			}
 		}	
@@ -34,9 +31,9 @@ function draw() {
 	for(i = 0; i < WIDTH; i++) {
 		for(j = 0; j < HEIGHT; j++) {
 			if (puzzle[i][j] == 0) {
-				$('#' + n + '').addClass("zero");
+				$('#' + n).addClass("zero");
 			} else {
-				$('#' + n + '').removeClass("zero");
+				$('#' + n).removeClass("zero");
 			}
 			$('#' + n + '').html(puzzle[i][j]);
 			n++;
@@ -45,56 +42,60 @@ function draw() {
 }
 
 function up() {
-	if(iZero > 0) {
-		var temp = puzzle[iZero - 1][jZero];
-		iZero--;
-		puzzle[iZero][jZero] = 0;
-		puzzle[iZero + 1][jZero] = temp;
+	if(i_zero > 0) {
+		var temp = puzzle[i_zero - 1][j_zero];
+		i_zero--;
+		puzzle[i_zero][j_zero] = 0;
+		puzzle[i_zero + 1][j_zero] = temp;
 		draw();
+		Log.info("UP");
 	}
 }
 
 function down() {
-	if(iZero < HEIGHT - 1) {
-		var temp = puzzle[iZero + 1][jZero];
-		iZero++;
-		puzzle[iZero][jZero] = 0;
-		puzzle[iZero - 1][jZero] = temp;
+	if(i_zero < HEIGHT - 1) {
+		var temp = puzzle[i_zero + 1][j_zero];
+		i_zero++;
+		puzzle[i_zero][j_zero] = 0;
+		puzzle[i_zero - 1][j_zero] = temp;
 		draw();
+		Log.info("DOWN");
 	}
 }
 
 function left() {
-	if(jZero > 0) {
-		var temp = puzzle[iZero][jZero - 1];
-		jZero--;
-		puzzle[iZero][jZero] = 0;
-		puzzle[iZero][jZero + 1] = temp;
+	if(j_zero > 0) {
+		var temp = puzzle[i_zero][j_zero - 1];
+		j_zero--;
+		puzzle[i_zero][j_zero] = 0;
+		puzzle[i_zero][j_zero + 1] = temp;
 		draw();
+		Log.info("LEFT");
 	}
 }
 
 function right() {
-	if(jZero < WIDTH - 1) {
-		var temp = puzzle[iZero][jZero + 1];
-		jZero++;
-		puzzle[iZero][jZero] = 0;
-		puzzle[iZero][jZero - 1] = temp;
+	if(j_zero < WIDTH - 1) {
+		var temp = puzzle[i_zero][j_zero + 1];
+		j_zero++;
+		puzzle[i_zero][j_zero] = 0;
+		puzzle[i_zero][j_zero - 1] = temp;
 		draw();
+		Log.info("RIGHT");
 	}
 }
 
 function keyboard_map(){
-	$('#UP').click(function() {
+	$('#up').click(function() {
 		up();
 	});
-	$('#DOWN').click(function() {
+	$('#down').click(function() {
 		down();
 	});
-	$('#LEFT').click(function() {
+	$('#left').click(function() {
 		left();
 	});
-	$('#RIGHT').click(function() {
+	$('#right').click(function() {
 		right();
 	});
 	
@@ -103,9 +104,9 @@ function keyboard_map(){
 	      arrow = {left: 37, up: 38, right: 39, down: 40 };
 
 	  switch (keyCode) {
-	    case arrow.left:
+		case arrow.left:
 	      left();
-	    break;
+		break;
 	    case arrow.up:
 	      up();
 	    break;
@@ -117,4 +118,13 @@ function keyboard_map(){
 	    break;
 	  }
 	});
+}
+
+function init(p) {
+	HEIGHT = p.length;
+	WIDTH = p[0].length;
+	puzzle = p;
+	get_zero();
+	draw();
+	keyboard_map();
 }
