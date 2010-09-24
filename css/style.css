@@ -1,0 +1,29 @@
+body {
+	font-family: Arial, sans-serif;
+}
+table {
+	border: 10px solid #999;
+	border-radius: 10px;
+}
+td {
+	width: 100px;
+	height: 100px;
+	background-color: #DDD;
+	text-align: center;
+	font-size: 30pt;
+}
+#game {
+	width: 330px;
+	margin: 100px auto 0 auto;
+}
+#controls {
+	text-align: center;
+	margin-top: 10px;
+}
+#controls input[type=button] {
+	width: 79px;
+}
+
+.zero {
+	background-color: #CCC;
+}
