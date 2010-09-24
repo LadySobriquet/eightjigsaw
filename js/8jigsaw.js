@@ -13,8 +13,8 @@ var Log = {
 function get_zero() {
 	var i = 0;
 	var j = 0;
-	for(i = 0; i < WIDTH; i++) {
-		for(j = 0; j < HEIGHT; j++) {
+	for(i = 0; i < HEIGHT; i++) {
+		for(j = 0; j < WIDTH; j++) {
 			if(puzzle[i][j] == 0) {
 				i_zero = i;
 				j_zero = j;
@@ -24,12 +24,34 @@ function get_zero() {
 	}
 }
 
+function init_screen(p) {
+	puzzle = p;
+	HEIGHT = puzzle.length;
+	WIDTH = puzzle[0].length;
+	
+	var tbody = "";
+	var n = 0;
+	var i = 0;
+	var j = 0;
+	for(i = 0; i < HEIGHT; i++) {
+		console.log(i);
+		tbody += "<tr>";
+		for(j = 0; j < WIDTH; j++) {
+			tbody += "<td id='" + n + "'></td>";
+			n++;
+		}
+		tbody += "</tr>";
+	}
+	$("#screen").html(tbody);
+	$("#game").css({'width': WIDTH * 109}); // largura da área do jogo; relativo a quantidade de td's
+}
+
 function draw() {
 	var n = 0;
 	var i = 0;
 	var j = 0;
-	for(i = 0; i < WIDTH; i++) {
-		for(j = 0; j < HEIGHT; j++) {
+	for(i = 0; i < HEIGHT; i++) {
+		for(j = 0; j < WIDTH; j++) {
 			if (puzzle[i][j] == 0) {
 				$('#' + n).addClass("zero");
 			} else {
@@ -101,7 +123,7 @@ function keyboard_map(){
 	
 	$(document).keydown(function (e) {
 	  var keyCode = e.keyCode || e.which,
-	      arrow = {left: 37, up: 38, right: 39, down: 40 };
+	      arrow = { left: 37, up: 38, right: 39, down: 40 };
 
 	  switch (keyCode) {
 		case arrow.left:
@@ -120,11 +142,9 @@ function keyboard_map(){
 	});
 }
 
-function init(p) {
-	HEIGHT = p.length;
-	WIDTH = p[0].length;
-	puzzle = p;
-	get_zero();
+function eight_jigsaw(p) {
+	init_screen(p);
 	draw();
+	get_zero();
 	keyboard_map();
 }
