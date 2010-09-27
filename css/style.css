@@ -1,12 +1,14 @@
 body {
 	font-family: Arial, sans-serif;
 }
+
 table {
 	border: 10px solid #999;
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
+
 td {
 	width: 100px;
 	height: 100px;
@@ -14,16 +16,52 @@ td {
 	text-align: center;
 	font-size: 30pt;
 }
-#game {
-	margin: 100px auto 0 auto;
+
+#main {
+	width: 450px;
+	height: auto;
+	margin: 0px auto 0px auto;
 }
+
+#up {
+	width: 65px;
+	height: 50px;
+	margin: 0px auto 5px auto;
+}
+
+#down {
+	width: 65px;
+	height: 50px;
+	margin: 10px auto 0px auto;
+}
+
+#left {
+	float: left;
+	width: 50px;
+	height: 65px;
+	margin: 28% auto auto auto;
+}
+
+#right {
+	float: right;
+	width: 50px;
+	height: 65px;
+	margin: 28% auto auto auto;
+}
+
+#game {
+	margin: 0px auto 0px auto;
+}
+
 #screen {
 	color: #333;
 }
+
 #controls {
 	text-align: center;
 	margin-top: 10px;
 }
+
 #controls input[type=button] {
 	width: 79px;
 }
@@ -32,6 +70,7 @@ td {
 	background-color: #CCC;
 	color: #CCC;
 }
+
 #log {
 	text-align: center;
 	margin-bottom: 10px;
