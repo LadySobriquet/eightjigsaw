@@ -10,6 +10,12 @@ var Log = {
 	}
 };
 
+var Log2 = {
+	info: function(msg) {
+		$("#log2").html(msg);
+	}
+};
+
 function get_zero() {
 	var i = 0;
 	var j = 0;
@@ -60,6 +66,7 @@ function draw() {
 			n++;
 		}	
 	}
+	Log2.info(get_location());
 }
 
 function up() {
@@ -146,4 +153,26 @@ function eight_jigsaw(p) {
 	draw();
 	get_zero();
 	keyboard_map();
+}
+
+function get_location() {
+	if (i_zero == 0 && j_zero == 0) {
+		return "ConnerLeftUp";
+	} else if (i_zero == 0 && j_zero == WIDTH-1) {
+		return "ConnerRightUp"
+	} else if (i_zero == HEIGHT-1 && j_zero == WIDTH-1) {
+		return "ConnerRightDown"
+	} else if (i_zero == HEIGHT-1 && j_zero == 0) {
+		return "ConnerLeftDown"
+	}	else if (i_zero > 0 && i_zero < HEIGHT-1 && j_zero == 0) {
+		return "WallLeft"
+	}	else if (i_zero > 0 && i_zero < HEIGHT-1 && j_zero == HEIGHT-1) {
+		return "WallRight"
+	}	else if (i_zero == 0 && j_zero > 0 && j_zero < WIDTH-1) {
+		return "WallUp"
+	}	else if (i_zero == HEIGHT-1 && j_zero > 0 && j_zero < WIDTH-1) {
+		return "WallDown"
+	} else {
+		return "Other";
+	};
 }
