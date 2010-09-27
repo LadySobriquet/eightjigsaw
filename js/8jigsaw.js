@@ -34,7 +34,6 @@ function init_screen(p) {
 	var i = 0;
 	var j = 0;
 	for(i = 0; i < HEIGHT; i++) {
-		console.log(i);
 		tbody += "<tr>";
 		for(j = 0; j < WIDTH; j++) {
 			tbody += "<td id='" + n + "'></td>";
@@ -57,7 +56,7 @@ function draw() {
 			} else {
 				$('#' + n).removeClass("zero");
 			}
-			$('#' + n + '').html(puzzle[i][j]);
+			$('#' + n).html(puzzle[i][j]);
 			n++;
 		}	
 	}
@@ -122,8 +121,8 @@ function keyboard_map(){
 	});
 	
 	$(document).keydown(function (e) {
-	  var keyCode = e.keyCode || e.which,
-	      arrow = { left: 37, up: 38, right: 39, down: 40 };
+	  var keyCode = e.which;
+	  var arrow = { left: 37, up: 38, right: 39, down: 40 };
 
 	  switch (keyCode) {
 		case arrow.left:
