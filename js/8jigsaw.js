@@ -48,7 +48,9 @@ function init_screen(p) {
 		tbody += "</tr>";
 	}
 	$("#screen").html(tbody);
-	$("#game").css({'width': WIDTH * 109}); // largura da área do jogo; relativo a quantidade de td's
+	$("#screen").css({'width': WIDTH * 109, 'height': HEIGHT * 109});
+	$("#game").css({'width': WIDTH * 109});
+	$("#game").css({'height': HEIGHT * 109});
 }
 
 function draw() {
@@ -64,9 +66,29 @@ function draw() {
 			}
 			$('#' + n).html(puzzle[i][j]);
 			n++;
-		}	
+		}
 	}
-	Log2.info(get_location());
+	if (finish()) {
+		$("#win").show();
+	} else{
+		$("#win").hide();
+	}
+}
+
+function finish () {
+	var i = 0;
+	var j = 0;
+	var num = 1;
+	var test = true;
+	for(i = 0; i < HEIGHT; i++) {
+		for(j = 0; j < WIDTH; j++) {
+			if (puzzle[i][j] != 0) {
+				test = test && puzzle[i][j] == num;
+			};
+			num++;
+		}
+	}
+	return test;
 }
 
 function up() {
